@@ -36,9 +36,9 @@ async def exportar_datos(fecha_inicio: str = Form(...), fecha_fin: str = Form(..
 
         # Consultar datos entre las fechas especificadas
         query = select(
-            table.c.id_temp, table.c.temp_grados, table.c.temp_lugar, table.c.fecha
+            table.c.id_temp, table.c.temp_grados, table.c.temp_lugar, table.c.temp_fecha
         ).where(
-            and_(table.c.fecha >= fecha_inicio, table.c.fecha <= fecha_fin)
+            and_(table.c.temp_fecha >= fecha_inicio, table.c.temp_fecha <= fecha_fin)
         )
         result = connection.execute(query).fetchall()
 
@@ -53,11 +53,11 @@ async def exportar_datos(fecha_inicio: str = Form(...), fecha_fin: str = Form(..
         raise HTTPException(status_code=404, detail="No se encontraron datos en el rango de fechas especificado")
 
     # Crear un DataFrame de pandas con los resultados
-    df = pd.DataFrame(result, columns=['id_temp', 'temp_grados', 'temp_lugar', 'fecha'])
+    df = pd.DataFrame(result, columns=['id_temp', 'temp_grados', 'temp_lugar', 'temp_fecha'])
 
     # Convertir el formato de la fecha
-    if 'fecha' in df.columns:
-        df['fecha'] = pd.to_datetime(df['fecha']).dt.strftime('%d-%m-%Y')
+    if 'temp_fecha' in df.columns:
+        df['temp_fecha'] = pd.to_datetime(df['temp_fecha']).dt.strftime('%d-%m-%Y')
 
     # Exportar a un archivo Excel en memoria
     output = BytesIO()

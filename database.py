@@ -3,9 +3,9 @@ from sqlalchemy import create_engine, MetaData
 # Configura tu conexión a la base de datos MySQL
 db_config = {
     'username': 'infra',
-    'password': 'pgwrc9q34q',
+    'password': '',
     'host': '192.168.200.108',
-    'database': 'thera'
+    'database': 'infra'
 }
 
 # Crear la URL de conexión

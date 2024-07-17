@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, MetaData
 # Configura tu conexión a la base de datos MySQL
 db_config = {
     'username': 'infra',
-    'password': '',
+    'password': 'pgwrc9q34q',
     'host': '192.168.200.108',
     'database': 'infra'
 }
